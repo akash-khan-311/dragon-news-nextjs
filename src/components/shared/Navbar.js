@@ -1,43 +1,75 @@
-"use client"
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
+"use client";
+import logo from "@/assets/logo.png";
+import { IconButton, Stack } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Toolbar from "@mui/material/Toolbar";
+import Image from "next/image";
 
-const pages = ['Products', 'Pricing', 'Blog'];
+// Icons
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
+import Link from "next/link";
+import Header from "./Header";
+
+const navItems = [
+  { route: "Home", pathaname: "/" },
+  { route: "Pages", pathaname: "/pages" },
+  { route: "Category", pathaname: "/category" },
+  { route: "News", pathaname: "/news" },
+  { route: "About", pathaname: "/about" },
+  { route: "Contact", pathaname: "/contact" },
+];
 
 function Navbar() {
- 
-
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-               
-                sx={{ my: 2, color: 'white', display: 'block' }}
+    <>
+      <Header />
+      <AppBar className="bg-black" position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Image src={logo} alt="site logo" />
+            <Box className="w-full text-center">
+              {navItems.map((item) => (
+                <Link key={item} href={`${item.pathaname}`}>
+                  <Button className="text-white">{item.route}</Button>
+                </Link>
+              ))}
+            </Box>
+            <Box className="">
+              <Stack
+                sx={{
+                  "& svg": { color: "white" },
+                }}
+                direction={"row"}
               >
-                {page}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+                <IconButton>
+                  <FacebookIcon />
+                </IconButton>
+                <IconButton>
+                  <TwitterIcon />
+                </IconButton>
+                <IconButton>
+                  <YouTubeIcon/>
+                </IconButton>
+                <IconButton>
+                  <LinkedInIcon/>
+                </IconButton>
+                <IconButton>
+                  <InstagramIcon/>
+                </IconButton>
+              </Stack>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </>
   );
 }
 export default Navbar;
